@@ -9,7 +9,7 @@
 }
 
 img{
-    width: 100%;
+    width: 200%;
     display: flex;    
 }
 
@@ -35,6 +35,24 @@ nav{
 .nav-logo{
     max-width: 100px;
 }
+
+.nav-logo:hover img{
+    content: url('Pics/avatar.png');
+}
+
+@keyframes noise {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-1%, -1%);
+    }
+    20% {
+      transform: translate(2%, -3%);
+    }
+    /* ... Add more noisy frames */
+  }
+
 
 .nav-links{
     list-style: none;
