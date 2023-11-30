@@ -40,9 +40,10 @@ nav{
     transition: all 0.3s ease;
 }
 
+/*
 .nav-logo:hover img{
     content: url('Pics/avatar2.png');
-}
+} */
 
 .nav-links{
     list-style: none;
