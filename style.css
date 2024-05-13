@@ -406,3 +406,61 @@ footer .column > a:hover{
         grid-template-columns: 1fr 150px;
     }
 }
+
+/* Game Is Here */
+
+#game-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #87CEEB;
+    background-color: #e0f7fa;
+    border-radius: 15px;
+    width: 600px; /* Adjust width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+#candle-container {
+    position: relative;
+    height: 400px;
+    margin-bottom: 20px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    background: #fff;
+}
+
+.candle {
+    width: 20px; /* Set a fixed width for the candles */
+    position: absolute;
+    bottom: 0;
+}
+
+.green-candle {
+    background-color: green;
+}
+
+.red-candle {
+    background-color: red;
+}
+
+#money-display, #game-status {
+    margin: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+#restart-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #1d4ed8;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
