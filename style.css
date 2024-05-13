@@ -157,6 +157,16 @@ header .image img{
     margin: auto;
 }
 
+header .game{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+}
+
+
 section .header{
     margin-bottom: 1rem;
     color: #fff;
@@ -368,6 +378,10 @@ footer .column > a:hover{
         grid-template-columns: repeat(1, 1fr);
     }
     header .image{
+        grid-area: 1/1/2/2;
+    }
+
+    header .game{
         grid-area: 1/1/2/2;
     }
     .features{
