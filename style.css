@@ -225,3 +225,70 @@ footer img {
     margin-right: 1rem;
     image-rendering: pixelated;
 }
+
+.logic-gates {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.section-block {
+    position: relative;
+    margin: 80px 0; /* Space between gates and sections */
+}
+
+.wire-line {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 80px;
+    width: 4px;
+    background-color: gray;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    z-index: 1;
+}
+
+.wire-line.active {
+    background-color: limegreen;
+    box-shadow: 0 0 6px limegreen;
+}
+
+.logic-section {
+    position: relative;
+    z-index: 0;
+}
+
+.logic-section.highlight {
+    border-color: limegreen;
+    background-color: #f0fff0;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+/* Back to gates button */
+  .back-to-gates {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0000aa;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 2px solid #ffff00;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 1000;
+    box-shadow: 2px 2px #444;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+  }
+  .back-to-gates:hover {
+    background-color: #000088;
+  }
+  .hidden {
+    display: none;
+  }

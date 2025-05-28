@@ -1,24 +1,35 @@
-function toggleSection(sectionId, logicType) {
-    const a = document.getElementById(logicType.toLowerCase() + '1').checked;
-    const b = document.getElementById(logicType.toLowerCase() + '2').checked;
-    let result = false;
+let unlockedSections = new Set();
 
-    switch (logicType) {
-        case 'AND':
-            result = a && b;
-            break;
-        case 'OR':
-            result = a || b;
-            break;
-        case 'NAND':
-            result = !(a && b);
-            break;
+function toggleSection(id, logic) {
+    const input1 = document.getElementById(`${logic.toLowerCase()}1`).checked;
+    const input2 = document.getElementById(`${logic.toLowerCase()}2`).checked;
+
+    let result = false;
+    if (logic === "AND") result = input1 && input2;
+    if (logic === "OR") result = input1 || input2;
+    if (logic === "NAND") result = !(input1 && input2);
+
+    const section = document.getElementById(id);
+    const wire = document.getElementById(`wire-${id}`);
+
+    if (result) {
+        section.classList.remove("hidden");
+        section.classList.add("highlight");
+        wire.classList.add("active");
+        section.scrollIntoView({ behavior: "smooth" });
+        unlockedSections.add(id);
+    } else {
+        section.classList.add("hidden");
+        section.classList.remove("highlight");
+        wire.classList.remove("active");
+        unlockedSections.delete(id);
     }
 
-    const section = document.getElementById(sectionId);
-    if (result) {
-        section.classList.remove('hidden');
+    // Show/hide back to gates button
+    const backBtn = document.getElementById("backToGates");
+    if (unlockedSections.size >= 2) {
+        backBtn.classList.remove("hidden");
     } else {
-        section.classList.add('hidden');
+        backBtn.classList.add("hidden");
     }
 }

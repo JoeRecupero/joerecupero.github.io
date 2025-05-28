@@ -25,52 +25,69 @@
         <p>Building circuits with soul—merging sound, sensors, and creativity.</p>
     </header>
 
-    <!-- Circuit Switch Navigation -->
+    <!-- Circuit Navigation Area -->
 <div id="circuit-nav">
     <h3>Unlock Sections:</h3>
     <div class="logic-gates">
-        <div class="logic-gate">
+        <div class="logic-gate" data-section="about">
             <img src="Pics/and.png" alt="AND Gate" class="gate-icon">
             <div class="inputs">
                 <input type="checkbox" id="and1">
                 <input type="checkbox" id="and2">
             </div>
-            <button onclick="toggleSection('about', 'AND')">Go</button>
+            <a href="#about">
+                <button onclick="toggleSection('about', 'AND')">Go</button>
+              </a>
         </div>
-        <div class="logic-gate">
+        <div class="logic-gate" data-section="projects">
             <img src="Pics/or.png" alt="OR Gate" class="gate-icon">
             <div class="inputs">
                 <input type="checkbox" id="or1">
                 <input type="checkbox" id="or2">
             </div>
-            <button onclick="toggleSection('projects', 'OR')">Go</button>
+            <a href="#projects">
+                <button onclick="toggleSection('projects', 'OR')">Go</button>
+              </a>
+              
         </div>
-        <div class="logic-gate">
+        <div class="logic-gate" data-section="music">
             <img src="Pics/nand.png" alt="NAND Gate" class="gate-icon">
             <div class="inputs">
                 <input type="checkbox" id="nand1">
                 <input type="checkbox" id="nand2">
             </div>
-            <button onclick="toggleSection('music', 'NAND')">Go</button>
+            <a href="#music">
+                <button onclick="toggleSection('music', 'NAND')">Go</button>
+              </a>
         </div>
     </div>
 </div>
 
-    <!-- Sections -->
+<!-- Wires and Full-Width Sections -->
+<div class="section-block" data-wire="about">
+    <div class="wire-line" id="wire-about"></div>
     <section id="about" class="container logic-section hidden">
         <h2 class="header">ABOUT ME</h2>
         <p>I love analog IC design and hacking retro aesthetics into modern interfaces.</p>
     </section>
+</div>
 
+<div class="section-block" data-wire="projects">
+    <div class="wire-line" id="wire-projects"></div>
     <section id="projects" class="container logic-section hidden">
         <h2 class="header">PROJECTS</h2>
         <p>From MEMS-based VADs to game circuits—my soldering iron's never cold.</p>
     </section>
+</div>
 
+<div class="section-block" data-wire="music">
+    <div class="wire-line" id="wire-music"></div>
     <section id="music" class="container logic-section hidden">
         <h2 class="header">MUSIC</h2>
         <p>My audio experiments blend bleeps, tape hiss, and algorithmic synthesis.</p>
     </section>
+</div>
+
 
     <footer class="container">
         <p>Find me on:</p>
@@ -84,5 +101,7 @@
     </div>
 
     <script src="script.js"></script>
+    
+    <a href="#circuit-nav" class="back-to-gates hidden" id="backToGates">↑ Back to Gates</a>
 </body>
 </html>
