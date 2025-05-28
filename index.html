@@ -8,31 +8,6 @@
 </head>
 <body>
 
-    <!-- Circuit Switch Navigation -->
-    <div id="circuit-nav">
-        <h3>Unlock Sections:</h3>
-        <div class="logic-gates">
-            <div>
-                <label>AND Switch</label>
-                <input type="checkbox" id="and1">
-                <input type="checkbox" id="and2">
-                <button onclick="toggleSection('about', 'AND')">Go</button>
-            </div>
-            <div>
-                <label>OR Switch</label>
-                <input type="checkbox" id="or1">
-                <input type="checkbox" id="or2">
-                <button onclick="toggleSection('projects', 'OR')">Go</button>
-            </div>
-            <div>
-                <label>NAND Switch</label>
-                <input type="checkbox" id="nand1">
-                <input type="checkbox" id="nand2">
-                <button onclick="toggleSection('music', 'NAND')">Go</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Header -->
     <nav>
         <div class="nav-logo">
@@ -49,6 +24,37 @@
         <h1>Hi, I am <span>Joe</span>, Audio & Electrical Engineer</h1>
         <p>Building circuits with soul—merging sound, sensors, and creativity.</p>
     </header>
+
+    <!-- Circuit Switch Navigation -->
+<div id="circuit-nav">
+    <h3>Unlock Sections:</h3>
+    <div class="logic-gates">
+        <div class="logic-gate">
+            <img src="Pics/and.png" alt="AND Gate" class="gate-icon">
+            <div class="inputs">
+                <input type="checkbox" id="and1">
+                <input type="checkbox" id="and2">
+            </div>
+            <button onclick="toggleSection('about', 'AND')">Go</button>
+        </div>
+        <div class="logic-gate">
+            <img src="Pics/or.png" alt="OR Gate" class="gate-icon">
+            <div class="inputs">
+                <input type="checkbox" id="or1">
+                <input type="checkbox" id="or2">
+            </div>
+            <button onclick="toggleSection('projects', 'OR')">Go</button>
+        </div>
+        <div class="logic-gate">
+            <img src="Pics/nand.png" alt="NAND Gate" class="gate-icon">
+            <div class="inputs">
+                <input type="checkbox" id="nand1">
+                <input type="checkbox" id="nand2">
+            </div>
+            <button onclick="toggleSection('music', 'NAND')">Go</button>
+        </div>
+    </div>
+</div>
 
     <!-- Sections -->
     <section id="about" class="container logic-section hidden">

@@ -1,5 +1,4 @@
-/* General Reset */
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -175,21 +174,45 @@ footer img {
 }
 
 #circuit-nav {
-    background-color: #ffcc00;
-    border: 2px solid #000;
-    padding: 1rem;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #fefefe url('https://www.transparenttextures.com/patterns/graphy.png');
+    border-top: 4px dashed #0000aa;
+    padding: 2rem;
+    text-align: center;
 }
 
 .logic-gates {
     display: flex;
-    gap: 2rem;
     justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
     margin-top: 1rem;
 }
 
-.logic-gates label {
-    font-weight: bold;
+.logic-gate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #000088;
+    padding: 1rem;
+    background-color: #fff url('https://www.transparenttextures.com/patterns/graphy.png');
+    box-shadow: 4px 4px #ccc;
+    width: 200px;
+}
+
+.gate-icon {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    margin-bottom: 0.5rem;
+}
+
+.inputs {
+    margin: 0.5rem 0;
+}
+
+.inputs input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 0 0.5rem;
 }
 
 .profile-icon {

@@ -1,22 +1,22 @@
 function toggleSection(sectionId, logicType) {
-    const input1 = document.getElementById(logicType.toLowerCase() + '1').checked;
-    const input2 = document.getElementById(logicType.toLowerCase() + '2').checked;
+    const a = document.getElementById(logicType.toLowerCase() + '1').checked;
+    const b = document.getElementById(logicType.toLowerCase() + '2').checked;
+    let result = false;
 
-    let show = false;
     switch (logicType) {
         case 'AND':
-            show = input1 && input2;
+            result = a && b;
             break;
         case 'OR':
-            show = input1 || input2;
+            result = a || b;
             break;
         case 'NAND':
-            show = !(input1 && input2);
+            result = !(a && b);
             break;
     }
 
     const section = document.getElementById(sectionId);
-    if (show) {
+    if (result) {
         section.classList.remove('hidden');
     } else {
         section.classList.add('hidden');
