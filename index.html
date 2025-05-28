@@ -27,7 +27,19 @@
 
     <!-- Circuit Navigation Area -->
 <div id="circuit-nav">
-    <h3>Unlock Sections:</h3>
+    <div class="terminal-frame">
+        <div class="title-bar">
+          <div class="title"> 💾 Logic Gate Terminal</div>
+          <div class="window-controls">
+            <button class="close-btn" title="Close"></button>
+            <button class="min-btn" title="Minimize"></button>
+            <button class="max-btn" title="Maximize"></button>
+          </div>
+        </div>
+        <div class="terminal-screen">
+            ⚡ Power Up Each Gate to Access the System!<span class="blink">_</span>
+        </div>
+      </div>
     <div class="logic-gates">
         <div class="logic-gate" data-section="about">
             <img src="Pics/and.png" alt="AND Gate" class="gate-icon">
@@ -35,9 +47,7 @@
                 <input type="checkbox" id="and1">
                 <input type="checkbox" id="and2">
             </div>
-            <a href="#about">
-                <button onclick="toggleSection('about', 'AND')">Go</button>
-              </a>
+            <a href="#about" class="go-button" onclick="toggleSection('about', 'AND')">➤ Go</a>
         </div>
         <div class="logic-gate" data-section="projects">
             <img src="Pics/or.png" alt="OR Gate" class="gate-icon">
@@ -45,10 +55,7 @@
                 <input type="checkbox" id="or1">
                 <input type="checkbox" id="or2">
             </div>
-            <a href="#projects">
-                <button onclick="toggleSection('projects', 'OR')">Go</button>
-              </a>
-              
+            <a href="#projects" class="go-button" onclick="toggleSection('projects', 'OR')">➤ Go</a>
         </div>
         <div class="logic-gate" data-section="music">
             <img src="Pics/nand.png" alt="NAND Gate" class="gate-icon">
@@ -56,9 +63,7 @@
                 <input type="checkbox" id="nand1">
                 <input type="checkbox" id="nand2">
             </div>
-            <a href="#music">
-                <button onclick="toggleSection('music', 'NAND')">Go</button>
-              </a>
+            <a href="#music" class="go-button" onclick="toggleSection('music', 'NAND')">➤ Go</a>
         </div>
     </div>
 </div>
@@ -101,7 +106,7 @@
     </div>
 
     <script src="script.js"></script>
-    
+
     <a href="#circuit-nav" class="back-to-gates hidden" id="backToGates">↑ Back to Gates</a>
 </body>
 </html>

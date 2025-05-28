@@ -200,9 +200,9 @@ footer img {
 }
 
 .gate-icon {
-    width: 64px;
-    height: 64px;
-    image-rendering: pixelated;
+    width: 128px;
+    height: 128px;
+    image-rendering: smooth;
     margin-bottom: 0.5rem;
 }
 
@@ -291,4 +291,278 @@ html {
   }
   .hidden {
     display: none;
+  }
+
+  .go-button {
+    display: inline-block;
+    background-color: #00ffff;
+    color: black;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    padding: 6px 16px;
+    border: 2px solid #000;
+    border-radius: 2px;
+    text-decoration: none;
+    box-shadow: 3px 3px 0px #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  
+  .go-button:hover {
+    background-color: #ff00ff;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px #000;
+  }
+  
+  .go-button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px #000;
+  }
+
+  .inputs input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    margin: 0 4px;
+    vertical-align: middle;
+    position: relative;
+    outline: none;
+    transition: transform 0.15s ease;
+  }
+  
+  /* LED shape - OFF */
+  .inputs input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), rgba(0,0,50,0.2));
+    background-color: rgba(0, 20, 50, 0.15);
+    box-shadow:
+      inset 0 0 3px rgba(255,255,255,0.05),
+      1px 1px 1px rgba(0,0,0,0.2);
+    transition: all 0.2s ease-in-out;
+    backdrop-filter: blur(1px);
+  }
+  
+  /* LED ON state (Blue) */
+  .inputs input[type="checkbox"]:checked::before {
+    background: radial-gradient(circle at 40% 40%, #66ccff, #004488);
+    box-shadow:
+      0 0 6px rgba(0, 150, 255, 0.7),
+      0 0 12px rgba(0, 150, 255, 0.5),
+      inset 0 0 6px rgba(100, 200, 255, 0.6);
+    animation: pulse-blue 5s ease-in-out infinite;
+  }
+  
+  /* Sleek blue pulse */
+  @keyframes pulse-blue {
+    0%, 100% {
+      box-shadow:
+        0 0 6px rgba(0, 150, 255, 0.7),
+        0 0 12px rgba(0, 150, 255, 0.5),
+        inset 0 0 6px rgba(100, 200, 255, 0.6);
+    }
+    50% {
+      box-shadow:
+        0 0 1px rgba(0, 180, 255, 0.9),
+        0 0 16px rgba(0, 180, 255, 0.8),
+        inset 0 0 7px rgba(150, 230, 255, 0.9);
+    }
+  }
+  
+  /* Hover glint effect */
+  .inputs input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  
+  .inputs input[type="checkbox"]:hover::after {
+    opacity: 1;
+  }
+
+  /* Outer window frame (classic 90s window) */
+.terminal-frame {
+    position: relative;
+    background: #0b2d0b; /* dark greenish background */
+    border: 1.5px solid #6fa46f;
+    border-top-color: #c6e2c6;
+    border-left-color: #c6e2c6;
+    border-bottom-color: #072007;
+    border-right-color: #072007;
+    border-radius: 6px;
+    margin: 30px auto;
+    max-width: 420px;
+    box-shadow:
+      inset 0 1px 0 #3a6a3a,
+      inset 0 -1px 0 #062006;
+    font-family: 'Courier New', monospace;
+    color: #a6ffa6;
+  }
+  
+ /* Outer window */
+.terminal-window {
+  width: 420px;
+  margin: 30px auto;
+  border: 2px solid #c6e2c6; /* light grey border */
+  border-top-color: #f0f0f0;  /* highlight top edge */
+  border-left-color: #f0f0f0; /* highlight left edge */
+  border-bottom-color: #3a3a3a; /* shadow bottom edge */
+  border-right-color: #3a3a3a;  /* shadow right edge */
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  background-color: #d4d0c8; /* classic light window background */
+  font-family: 'Courier New', Courier, monospace;
+  user-select: none;
+}
+
+/* Title bar */
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, #0f3c0f, #0a2d0a);
+  border-bottom: 1px solid #1a601a;
+  padding: 4px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: inset 0 1px 0 #4ad14a;
+  color: #a6ffa6;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 0 0 4px #0f0;
+}
+
+/* Window control buttons */
+.window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.window-controls button {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #6fa46f;
+  background: linear-gradient(to bottom, #3a7f3a, #0b2d0b);
+  box-shadow: inset 0 1px 0 #75b875;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+}
+
+.window-controls button:hover {
+  background: linear-gradient(to bottom, #68c468, #1f5f1f);
+  border-color: #a4f1a4;
+  box-shadow: inset 0 1px 1px #9feb9f;
+}
+
+/* Maximize button: a square */
+.max-btn::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid #a6ffa6;
+    border-bottom: 1px solid #a6ffa6;
+    border-right: 1px solid #a6ffa6;
+    border-top: 2px solid #d4f7d4;  /* thicker and brighter top line */
+    border-radius: 1px;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+/* Minimize button: a horizontal line */
+.min-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  right: 3px;
+  height: 2px;
+  background: #a6ffa6;
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+/* Close button: a cross */
+.close-btn::before, .close-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: #a6ffa6;
+  transform-origin: center;
+  border-radius: 1px;
+}
+
+.close-btn::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.close-btn::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+  
+  /* Terminal screen with CRT scanlines */
+  .terminal-screen {
+    position: relative;
+    background: repeating-linear-gradient(
+      0deg,
+      #072007,
+      #072007 2px,
+      #0d3a0d 2px,
+      #0d3a0d 4px
+    );
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    padding: 15px 20px;
+    border-radius: 0 0 6px 6px;
+    text-align: center;
+    text-shadow: 0 0 8px #0f0;
+    filter: contrast(1.3) brightness(1.2);
+    box-shadow: inset 0 0 25px #0f0;
+    overflow: hidden;
+  }
+  
+  /* Add subtle flicker (optional) */
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+  }
+  .terminal-screen {
+    animation: flicker 3s infinite;
+  }
+  
+  /* Blinking cursor */
+  .blink {
+    animation: blink 1.2s step-start infinite;
+    color: #00ff00;
+    text-shadow: 0 0 6px #0f0;
+  }
+  
+  /* Blink keyframes */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }

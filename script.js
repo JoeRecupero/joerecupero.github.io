@@ -16,7 +16,6 @@ function toggleSection(id, logic) {
         section.classList.remove("hidden");
         section.classList.add("highlight");
         wire.classList.add("active");
-        section.scrollIntoView({ behavior: "smooth" });
         unlockedSections.add(id);
     } else {
         section.classList.add("hidden");
