@@ -32,3 +32,19 @@ function toggleSection(id, logic) {
         backBtn.classList.add("hidden");
     }
 }
+
+// Dark mode toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.createElement('button');
+    toggle.textContent = '🌙 Toggle Dark Mode';
+    toggle.className = 'btn';
+    toggle.style.position = 'fixed';
+    toggle.style.top = '20px';
+    toggle.style.left = '20px';
+    toggle.style.zIndex = 1001;
+    document.body.appendChild(toggle);
+
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+});
