@@ -33,7 +33,7 @@ function toggleSection(id, logic) {
     }
 }
 
-// Dark mode toggle
+// Dark mode toggle 
 document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.createElement('button');
     toggle.textContent = '🌙 Toggle Dark Mode';
