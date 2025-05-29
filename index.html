@@ -1,112 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaenam's Retro Lab</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jaenam's Retro Lab</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- Header -->
-    <nav>
-        <div class="nav-logo">
-            <a href="#"><img src="Pics/avatar2.png" class="profile-icon"></a>
-        </div>
-        <ul class="nav-links">
-            <li class="link"><a href="#">Home</a></li>
-        </ul>
-        <img src="Pics/shiba.png" class="doge-icon">
-    </nav>
-
-    <header class="container">
-        <h4>Welcome Visitor</h4>
-        <h1>Hi, I am <span>Joe</span>, Audio & Electrical Engineer</h1>
-        <p>Building circuits with soul—merging sound, sensors, and creativity.</p>
-    </header>
-
-    <!-- Circuit Navigation Area -->
-<div id="circuit-nav">
-    <div class="terminal-frame">
-        <div class="title-bar">
-          <div class="title"> 💾 Logic Gate Terminal</div>
-          <div class="window-controls">
-            <button class="close-btn" title="Close"></button>
-            <button class="min-btn" title="Minimize"></button>
-            <button class="max-btn" title="Maximize"></button>
-          </div>
-        </div>
-        <div class="terminal-screen">
-            ⚡ Power Up Each Gate to Access the Sections!<span class="blink">_</span>
-        </div>
-      </div>
-    <div class="logic-gates">
-        <div class="logic-gate" data-section="about">
-            <img src="Pics/and.png" alt="AND Gate" class="gate-icon">
-            <div class="inputs">
-                <input type="checkbox" id="and1">
-                <input type="checkbox" id="and2">
-            </div>
-            <a href="#about" class="go-button" onclick="toggleSection('about', 'AND')">➤ Go</a>
-        </div>
-        <div class="logic-gate" data-section="projects">
-            <img src="Pics/or.png" alt="OR Gate" class="gate-icon">
-            <div class="inputs">
-                <input type="checkbox" id="or1">
-                <input type="checkbox" id="or2">
-            </div>
-            <a href="#projects" class="go-button" onclick="toggleSection('projects', 'OR')">➤ Go</a>
-        </div>
-        <div class="logic-gate" data-section="music">
-            <img src="Pics/nand.png" alt="NAND Gate" class="gate-icon">
-            <div class="inputs">
-                <input type="checkbox" id="nand1">
-                <input type="checkbox" id="nand2">
-            </div>
-            <a href="#music" class="go-button" onclick="toggleSection('music', 'NAND')">➤ Go</a>
-        </div>
+  <!-- Header -->
+  <nav>
+    <div class="nav-logo">
+      <a href="#"><img src="Pics/avatar2.png" class="profile-icon" /></a>
     </div>
-</div>
+    <ul class="nav-links">
+      <li class="link"><a href="#">Home</a></li>
+    </ul>
+    <img src="Pics/shiba.png" class="doge-icon" />
+  </nav>
 
-<!-- Wires and Full-Width Sections -->
-<div class="section-block" data-wire="about">
+  <header class="container">
+    <h4>Welcome Visitor</h4>
+    <h1>Hi, I am <span>Joe</span>, Audio & Electrical Engineer</h1>
+    <p>Building circuits with soul—merging sound, sensors, and creativity.</p>
+  </header>
+
+  <!-- Retro Logic Gate Terminal (Fixed) -->
+  <section id="logic-terminal">
+    <div class="title-bar">
+      <span>💾 Logic Gate Terminal</span>
+    </div>
+
+    <div id="logic-canvas">
+      <!-- AND Gate -->
+      <div class="logic-gate" style="top: 40px; left: 20px;" data-section="about">
+        <img src="Pics/and.png" class="gate-icon" />
+        <div class="inputs">
+          <input type="checkbox" id="and1" />
+          <input type="checkbox" id="and2" />
+        </div>
+        <a href="#about" class="go-button" onclick="toggleSection('about', 'AND')">➤ Go</a>
+      </div>
+
+      <!-- OR Gate -->
+      <div class="logic-gate" style="top: 40px; left: 200px;" data-section="projects">
+        <img src="Pics/or.png" class="gate-icon" />
+        <div class="inputs">
+          <input type="checkbox" id="or1" />
+          <input type="checkbox" id="or2" />
+        </div>
+        <a href="#projects" class="go-button" onclick="toggleSection('projects', 'OR')">➤ Go</a>
+      </div>
+
+      <!-- NAND Gate -->
+      <div class="logic-gate" style="top: 40px; left: 380px;" data-section="music">
+        <img src="Pics/nand.png" class="gate-icon" />
+        <div class="inputs">
+          <input type="checkbox" id="nand1" />
+          <input type="checkbox" id="nand2" />
+        </div>
+        <a href="#music" class="go-button" onclick="toggleSection('music', 'NAND')">➤ Go</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unlocked Sections -->
+  <div class="section-block" data-wire="about">
     <div class="wire-line" id="wire-about"></div>
     <section id="about" class="container logic-section hidden">
-        <h2 class="header">ABOUT ME</h2>
-        <p>I love analog IC design and hacking retro aesthetics into modern interfaces.</p>
+      <h2 class="header">ABOUT ME</h2>
+      <p>I love analog IC design and hacking retro aesthetics into modern interfaces.</p>
     </section>
-</div>
+  </div>
 
-<div class="section-block" data-wire="projects">
+  <div class="section-block" data-wire="projects">
     <div class="wire-line" id="wire-projects"></div>
     <section id="projects" class="container logic-section hidden">
-        <h2 class="header">PROJECTS</h2>
-        <p>From MEMS-based VADs to game circuits—my soldering iron's never cold.</p>
+      <h2 class="header">PROJECTS</h2>
+      <p>From MEMS-based VADs to game circuits—my soldering iron's never cold.</p>
     </section>
-</div>
+  </div>
 
-<div class="section-block" data-wire="music">
+  <div class="section-block" data-wire="music">
     <div class="wire-line" id="wire-music"></div>
     <section id="music" class="container logic-section hidden">
-        <h2 class="header">MUSIC</h2>
-        <p>My audio experiments blend bleeps, tape hiss, and algorithmic synthesis.</p>
+      <h2 class="header">MUSIC</h2>
+      <p>My audio experiments blend bleeps, tape hiss, and algorithmic synthesis.</p>
     </section>
-</div>
+  </div>
 
-
-    <footer class="container">
-        <p>Find me on:</p>
-        <div class="socials">
-            <a href="#"><i class="ri-twitter-line"></i></a>
-        </div>
-    </footer>
-
-    <div class="copyright">
-        &copy; 2025 Jaenam's Retro Lab
-    </div>
-
-    <script src="script.js"></script>
-
-    <a href="#circuit-nav" class="back-to-gates hidden" id="backToGates">↑ Back to Gates</a>
+  <a href="#logic-terminal" class="back-to-gates hidden" id="backToGates">↑ Back to Gates</a>
+  <script src="script.js"></script>
 </body>
 </html>
