@@ -72,11 +72,24 @@ out vec4 fragColor;
 * ----
 */
 
-void mainImage( out vec4 O, vec2 I )
-{   
-    vec2 r = iResolution.xy, p = (I+I-r)/r.y*8.;
-    
-    O = tanh(vec4(1,2,3,1)/length(tan(abs(p-iTime))+8.*sin(p.x+iTime)+p));
+void mainImage0( out vec4 O, in vec2 I )
+{
+    float t = iTime;
+    vec2 r = iResolution.xy, p = (I+I-r.xy)/r.y*8.;    
+    O = tanh(vec4(1,2,3,1) / length(tan(abs(p-t))+8.*sin(p.x+t)+p));  
+}
+void mainImage(out vec4 o, vec2 u) 
+{ 
+    float s = 16., k; 
+    vec2 j = vec2(.5); 
+    o = vec4(0); 
+    vec4 c; 
+    mainImage0(c, u); 
+    for (k = s; k-- > .5; ) { 
+        mainImage0(c, u + j - .5); 
+        o += c; 
+        j = fract(j + vec2(.755, .57).yx); 
+    };o /= s;o.a==1.;
 }
 
 // ---- How to port shaders from Shadertoy ----
