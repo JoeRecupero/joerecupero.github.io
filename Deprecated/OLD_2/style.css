@@ -1,0 +1,279 @@
+/* ======================
+   Global Styles
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f0f0f0 url('https://www.transparenttextures.com/patterns/graphy.png');
+  color: #222;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ======================
+   Navbar
+====================== */
+nav {
+  background-color: #0000aa;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 4px double #ffff00;
+}
+
+.nav-logo img {
+  height: 50px;
+  image-rendering: pixelated;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links .link a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links .link a:hover {
+  color: #ffff00;
+}
+
+.profile-icon {
+  height: 80px;
+  image-rendering: pixelated;
+}
+
+.doge-icon {
+  height: 30px;
+  margin-right: 1rem;
+  image-rendering: pixelated;
+}
+
+/* ======================
+   Header Section
+====================== */
+header.container {
+  background: linear-gradient(135deg, #ff99cc 0%, #66ccff 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #000033;
+  border-bottom: 4px dotted #000;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  text-shadow: 1px 1px #fff;
+}
+
+header h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+header span {
+  color: #ff0000;
+}
+
+/* ======================
+   Logic Terminal Window
+====================== */
+#logic-terminal {
+  width: 100%;
+  max-width: 560px;
+  margin: 2rem auto;
+  background-color: #ececec;
+  border: 2px solid black;
+  box-shadow: 4px 4px #808080;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Title bar */
+#logic-terminal .title-bar {
+  background-color: #000080;
+  color: white;
+  padding: 6px 12px;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 2px solid black;
+}
+
+/* Canvas inside window */
+#logic-canvas {
+  position: relative;
+  height: 360px;
+  background-color: #c0c0c0;
+  border-top: 2px solid #000;
+  overflow: hidden;
+}
+
+/* ======================
+   Draggable Logic Gates
+====================== */
+.logic-gate {
+  position: absolute;
+  width: 150px;
+  background-color: #fff;
+  border: 2px solid #000;
+  padding: 8px;
+  text-align: center;
+  box-shadow: 2px 2px #000;
+  cursor: grab;
+}
+
+.logic-gate:active {
+  cursor: grabbing;
+}
+
+.gate-icon {
+  width: 100px;
+  height: 100px;
+  image-rendering: pixelated;
+  margin-bottom: 0.5rem;
+}
+
+.inputs input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #000;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0 4px;
+  vertical-align: middle;
+  position: relative;
+  outline: none;
+  box-shadow: 2px 2px 0 #000;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.inputs input[type="checkbox"]:checked::before {
+  content: '✔';
+  font-size: 16px;
+  color: #000;
+  position: absolute;
+  top: 0;
+  left: 3px;
+}
+
+.inputs input[type="checkbox"]:hover {
+  background-color: #ffe97f;
+  box-shadow: 0 0 8px #ffcc00, 2px 2px 0 #000;
+}
+
+/* Go button */
+.go-button {
+  display: inline-block;
+  background-color: #00ffff;
+  color: black;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 2px solid #000;
+  text-decoration: none;
+  box-shadow: 2px 2px #000;
+  margin-top: 6px;
+}
+
+.go-button:hover {
+  background-color: #ff00ff;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #000;
+}
+
+.go-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+/* ======================
+   Unlockable Sections
+====================== */
+.section-block {
+  position: relative;
+  margin: 80px 0;
+}
+
+.wire-line {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 80px;
+  width: 4px;
+  background-color: gray;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  z-index: 1;
+}
+
+.wire-line.active {
+  background-color: limegreen;
+  box-shadow: 0 0 6px limegreen;
+}
+
+.logic-section {
+  position: relative;
+  z-index: 0;
+}
+
+.logic-section.highlight {
+  border-color: limegreen;
+  background-color: #f0fff0;
+}
+
+section.container {
+  padding: 3rem 2rem;
+  border-top: 4px dashed #000088;
+  background-color: #ffffff;
+}
+
+.header {
+  font-size: 2rem;
+  color: #0000cc;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000;
+  display: inline-block;
+}
+
+.back-to-gates {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0000aa;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: 2px solid #ffff00;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+  z-index: 1000;
+  box-shadow: 2px 2px #444;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.back-to-gates:hover {
+  background-color: #000088;
+}
