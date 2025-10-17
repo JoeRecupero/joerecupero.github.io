@@ -24,3 +24,10 @@ canvas#canvas {
 body, canvas {
   transition: all 0.2s ease-out;
 }
+
+@media (max-width: 768px) {
+  canvas {
+    width: 100vw;
+    height: 100vh;
+  }
+}
