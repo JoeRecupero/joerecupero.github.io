@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jae's Shader Vault</title>
+    <!-- disable-loop-protection -->
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+        // Force WebGL2
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('webgl2', {
+            antialias: true,
+            powerPreference: "high-performance",
+            depth: false,
+            stencil: false,
+            alpha: false,
+            preserveDrawingBuffer: false,
+            premultipliedAlpha: false,
+            desynchronized: false,
+            failIfMajorPerformanceCaveat: false
+        });
+        if (!context) {
+            throw new Error('WebGL2 not supported');
+        }
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            context: context
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+        document.body.appendChild(renderer.domElement);
+        
+        // Resize handler
+        function onWindowResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener('resize', onWindowResize);
+
+        
+        // Define shaders
+        const vertexShader = `in vec3 position;
+        void main() {
+            gl_Position = vec4(position, 1.0);
+        }`;
+        const fragmentShader = `
+precision highp float;
+precision highp int;
+uniform vec3      iResolution;
+uniform float     iTime;
+uniform float     iTimeDelta;
+uniform float     iFrameRate;
+uniform int       iFrame;
+uniform float     iChannelTime[4];
+uniform vec3      iChannelResolution[4];
+uniform vec4      iMouse;
+uniform vec4      iDate;
+out vec4 fragColor;
+
+/* ---- 
+* To port examples from Shadertoy, just replace mainImage function bellow with content copied from Shadertoy 
+* ----
+*/
+
+void mainImage0( out vec4 O, in vec2 I )
+{
+    float t = iTime;
+    vec2 r = iResolution.xy, p = (I+I-r.xy)/r.y*8.;    
+    O = tanh(vec4(1,2,3,1) / length(tan(abs(p-t))+8.*sin(p.x+t)+p));  
+}
+void mainImage(out vec4 o, vec2 u) 
+{ 
+    float s = 16., k; 
+    vec2 j = vec2(.5); 
+    o = vec4(0); 
+    vec4 c; 
+    mainImage0(c, u); 
+    for (k = s; k-- > .5; ) { 
+        mainImage0(c, u + j - .5); 
+        o += c; 
+        j = fract(j + vec2(.755, .57).yx); 
+    };o /= s;o.a==1.;
+}
+
+// ---- How to port shaders from Shadertoy ----
+
+void main() {
+    mainImage(fragColor, gl_FragCoord.xy);
+}`;
+
+        // Shader material
+        const uniforms = {
+            iTime: { value: 0 },
+            iResolution: { value: new THREE.Vector3() },
+            iMouse: { value: new THREE.Vector4() },
+            iFrame: { value: 0 },
+            iTimeDelta: { value: 0 },
+            iFrameRate: { value: 60 },
+            iChannelTime: { value: [0, 0, 0, 0] },
+            iChannelResolution: { value: [
+                new THREE.Vector3(0, 0, 0),
+                new THREE.Vector3(0, 0, 0),
+                new THREE.Vector3(0, 0, 0),
+                new THREE.Vector3(0, 0, 0)
+            ]},
+            iDate: { value: new THREE.Vector4() }
+        };
+
+        const material = new THREE.RawShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            uniforms,
+            glslVersion: THREE.GLSL3,
+            toneMapped: false,
+            transparent: false,
+            depthTest: false,
+            depthWrite: false
+        });
+
+        // Create a plane that fills the screen
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        // Mouse handling
+        let mousePosition = { x: 0, y: 0, z: 0, w: 0 };
+        let isMouseDown = false;
+
+        renderer.domElement.addEventListener('mousemove', (e) => {
+            mousePosition.x = e.clientX;
+            mousePosition.y = window.innerHeight - e.clientY;
+            if (isMouseDown) {
+                mousePosition.z = mousePosition.x;
+                mousePosition.w = mousePosition.y;
+            }
+            uniforms.iMouse.value.set(mousePosition.x, mousePosition.y, mousePosition.z, mousePosition.w);
+        });
+
+        renderer.domElement.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            mousePosition.z = e.clientX;
+            mousePosition.w = window.innerHeight - e.clientY;
+            uniforms.iMouse.value.set(mousePosition.x, mousePosition.y, mousePosition.z, mousePosition.w);
+        });
+
+        renderer.domElement.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        // Animation loop
+        let startTime = Date.now();
+        let lastTime = startTime;
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const currentTime = Date.now();
+            const deltaTime = (currentTime - lastTime) * 0.001; // in seconds
+            lastTime = currentTime;
+
+            uniforms.iTime.value = (currentTime - startTime) * 0.001;
+            uniforms.iTimeDelta.value = deltaTime;
+            uniforms.iFrame.value++;
+            uniforms.iFrameRate.value = 1.0 / deltaTime;
+            uniforms.iResolution.value.set(window.innerWidth, window.innerHeight, 1);
+
+            // Update date uniform
+            const date = new Date();
+            uniforms.iDate.value.set(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours() * 60 * 60 + 
+                date.getMinutes() * 60 + 
+                date.getSeconds() + 
+                date.getMilliseconds() * 0.001
+            );
+            
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+</html>

@@ -1,23 +1,38 @@
-function scrollToElement(elementSelector, instance = 0) {
-    const elements = document.querySelectorAll(elementSelector);
-    if (elements.length > instance) {
-        elements[instance].scrollIntoView({behavior: 'smooth'});
-    }
-}
+// WEBGL BOOTSTRAP TWGL.js
+const glcanvas = document.getElementById("canvas");
+const gl = glcanvas.getContext("webgl2");
 
-const link1 = document.getElementById("link1");
-const link2 = document.getElementById("link2");
-const link3 = document.getElementById("link3");
+// Fractal code in HTML window - Fragment Shader //
+const programInfo = twgl.createProgramInfo(gl, [
+  "vertexShader",
+  "fragmentShader"
+]);
 
-link1.addEventListener('click', () => {
-    scrollToElement('.header');
-});
+const arrays = {
+  position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0]
+};
 
-link2.addEventListener('click', () => {
-    // Scroll to the second element with "header" class
-    scrollToElement('.header', 1);
-});
+const bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
 
-link3.addEventListener('click', () => {
-    scrollToElement('.column');
+// RENDER LOOP
+const render = (time) => {
+  twgl.resizeCanvasToDisplaySize(gl.canvas, 1.0);
+
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+  let uniforms = {
+    u_time: time * 0.001,
+    u_resolution: [gl.canvas.width, gl.canvas.height]
+  };
+
+  gl.useProgram(programInfo.program);
+  twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+  twgl.setUniforms(programInfo, uniforms);
+  twgl.drawBufferInfo(gl, bufferInfo);
+
+  requestAnimationFrame(render);
+};
+
+// DOM READY
+window.addEventListener("DOMContentLoaded", (event) => {
+  requestAnimationFrame(render);
 });
