@@ -14,6 +14,7 @@ let frameTime = 1000 / targetFPS;
 let lastFrameTime = 0;
 let isPageVisible = true;
 let performanceMode = 'high'; // 'high', 'medium', 'low'
+let frozenTime = null;
 
 // Initialize WebGL resources
 function initWebGL() {
@@ -104,6 +105,23 @@ const render = (time) => {
     return;
   }
 
+  // Check if we're in the projects section - freeze shader
+  const projectsSection = document.querySelector('#projects');
+  if (projectsSection) {
+    const rect = projectsSection.getBoundingClientRect();
+    const isInProjects = rect.top <= 0 && rect.bottom > 0;
+    
+    if (isInProjects) {
+      // Freeze the shader at current time when entering projects section
+      if (frozenTime === null) {
+        frozenTime = time * 0.001;
+      }
+    } else {
+      // Reset frozen time when leaving projects section
+      frozenTime = null;
+    }
+  }
+
   // Frame rate limiting
   const deltaTime = time - lastFrameTime;
   if (deltaTime < frameTime) {
@@ -135,7 +153,7 @@ const render = (time) => {
     }
 
     const uniforms = {
-      u_time: time * 0.001,
+      u_time: frozenTime !== null ? frozenTime : time * 0.001,
       u_resolution: [gl.canvas.width, gl.canvas.height],
     };
 

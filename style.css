@@ -597,12 +597,28 @@ canvas#canvas {
 =        Sections                =
 ================================*/
 
-.projects-section, .contact-section {
-  padding: 5rem 2rem;
+.projects-section {
+  padding: 5rem 0;
   background: rgba(26, 26, 26, 0.8);
   backdrop-filter: blur(10px);
-  position: relative;
-  z-index: 5;
+  position: absolute;
+  z-index: 1000;
+  width: 100vw;
+  left: 0;
+  right: 0;
+  top: 100vh;
+  height: 1000px; /* Extend to cover both sections */
+}
+
+.contact-section {
+  padding: 5rem 0;
+  background: transparent; /* No background, use projects section background */
+  position: absolute;
+  z-index: 1001; /* Above projects section */
+  width: 100vw;
+  left: 0;
+  right: 0;
+  top: calc(100vh + 600px); /* Position it lower to avoid overlap */
 }
 
 .container {
@@ -845,6 +861,23 @@ canvas#canvas {
     gap: 0.75rem;
   }
   
+  .projects-section, .contact-section {
+    position: relative;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: auto;
+    height: auto;
+    padding: 3rem 1rem;
+    margin: 0;
+  }
+  
+  .contact-section {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    margin-top: -2px; /* Overlap more to eliminate gap at small widths */
+  }
+  
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -894,9 +927,37 @@ canvas#canvas {
     display: none;
   }
   
+  .projects-section, .contact-section {
+    position: relative;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: auto;
+    height: auto;
+    padding: 2rem 1rem;
+    margin: 0;
+  }
+  
+  .contact-section {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    margin-top: -2px; /* Overlap more to eliminate gap at small widths */
+  }
+  
   .avatar {
     width: 120px;
     height: 120px;
+  }
+}
+
+/* Extra small screens - ensure no gap */
+@media (max-width: 360px) {
+  .projects-section, .contact-section {
+    padding: 2rem 0.75rem; /* Smaller margins for very small screens */
+  }
+  
+  .contact-section {
+    margin-top: -3px; /* More overlap for very small screens */
   }
   
   .avatar-glow {
