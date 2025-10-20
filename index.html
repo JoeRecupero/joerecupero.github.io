@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jae - Portfolio</title>
+  <title>Jae</title>
   <meta name="description" content="Jae Recupero - Creative Developer & Shader Artist" />
 
   <!-- Link to stylesheet -->
@@ -23,11 +23,6 @@
   <nav class="nav">
     <div class="nav-content">
       <div class="logo"></div>
-      <div class="nav-links">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
     </div>
   </nav>
 
@@ -36,11 +31,11 @@
     <div class="hero-content">
       <div class="liquid-glass-container">
         <div class="liquid-glass">
-          <div class="avatar-container">
-            <img src="Pics/avatar2.png" alt="Jae  Recupero" class="avatar" />
-            <div class="avatar-glow"></div>
-          </div>
-          <div class="bio-content">
+          <div class="bio-content active" id="bio-content">
+            <div class="avatar-container">
+              <img src="Pics/avatar_cube.png" alt="Jae  Recupero" class="avatar" />
+              <div class="avatar-glow"></div>
+            </div>
             <h1 class="name">Jae</h1>
             <h2 class="title">Graphics Programmer & Shader Artist</h2>
             <p class="bio-text">
@@ -48,8 +43,63 @@
               Passionate about pushing the boundaries of web technology and visual storytelling.
             </p>
             <div class="bio-links">
+              <button class="cta-button about-button" onclick="showAboutContent()">About Me</button>
               <a href="#projects" class="cta-button">View My Work</a>
-              <a href="#contact" class="cta-button secondary">Get In Touch</a>
+            </div>
+            <div class="social-links">
+              <a href="https://x.com/Jaenam97" class="social-link" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://open.spotify.com/artist/0svOHoSzdUne4MvQF9m9NQ?si=PmfDmI-mTYONfGKyo906og" class="social-link" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.721-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
+                </svg>
+              </a>
+              <a href="mailto:joerecupero97@gmail.com" class="social-link" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="about-content" id="about-content">
+            <h1 class="name">About Me</h1>
+            <h2 class="title">Creative Developer & Digital Artist</h2>
+            <div class="about-text">
+              <p>
+                I love exploring the boundaries of what's possible in web browsers, pushing the limits of 
+                real-time graphics and interactive experiences. From complex mathematical visualizations to 
+                immersive 3D environments, I enjoy bringing abstract concepts to life through code.
+              </p>
+              <div class="skills-grid">
+                <div class="skill-item">
+                  <span class="skill-icon">🎨</span>
+                  <span class="skill-name">Creative Coding</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-icon">⚡</span>
+                  <span class="skill-name">WebGL & Shaders</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-icon">🔧</span>
+                  <span class="skill-name">JavaScript</span>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-icon">🎵</span>
+                  <span class="skill-name">Music Production</span>
+                </div>
+              </div>
+            </div>
+            <div class="back-button-container">
+              <button class="back-button" onclick="showBioContent()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>Back</span>
+              </button>
             </div>
           </div>
         </div>
@@ -129,7 +179,7 @@
 
   void mainImage(out vec4 o, in vec2 u)
   {
-      float s = 16.0;
+      float s = 8.0; // Reduced from 16.0 to 8.0 for better performance
       float k;
       vec2 j = vec2(0.5);
       o = vec4(0.0);

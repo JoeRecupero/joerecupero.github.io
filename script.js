@@ -5,6 +5,16 @@ let programInfo;
 let bufferInfo;
 let isRendering = false;
 
+// Performance optimization variables
+let frameCount = 0;
+let lastTime = 0;
+let fps = 60;
+let targetFPS = 60;
+let frameTime = 1000 / targetFPS;
+let lastFrameTime = 0;
+let isPageVisible = true;
+let performanceMode = 'high'; // 'high', 'medium', 'low'
+
 // Initialize WebGL resources
 function initWebGL() {
   // Get canvas element
@@ -49,8 +59,12 @@ function initWebGL() {
 function resizeCanvas(gl) {
   let scale = 1.0;
 
-  // Reduce internal resolution on smaller screens for better FPS
-  if (window.innerWidth < 768) {
+  // Performance-based scaling
+  if (performanceMode === 'low') {
+    scale = 0.4; // 40% resolution for low-end devices
+  } else if (performanceMode === 'medium') {
+    scale = 0.6; // 60% resolution for medium devices
+  } else if (window.innerWidth < 768) {
     scale = 0.6; // 60% of full res on mobile
   }
 
@@ -84,11 +98,41 @@ const render = (time) => {
     return;
   }
 
+  // Performance optimization: Skip frames if page is not visible
+  if (!isPageVisible) {
+    requestAnimationFrame(render);
+    return;
+  }
+
+  // Frame rate limiting
+  const deltaTime = time - lastFrameTime;
+  if (deltaTime < frameTime) {
+    requestAnimationFrame(render);
+    return;
+  }
+
   try {
     resizeCanvas(gl);
 
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     gl.clear(gl.COLOR_BUFFER_BIT);
+
+    // Performance monitoring
+    frameCount++;
+    if (time - lastTime >= 1000) {
+      fps = frameCount;
+      frameCount = 0;
+      lastTime = time;
+      
+      // Auto-adjust performance mode based on FPS
+      if (fps < 30 && performanceMode === 'high') {
+        performanceMode = 'medium';
+        console.log('Switching to medium performance mode');
+      } else if (fps < 20 && performanceMode === 'medium') {
+        performanceMode = 'low';
+        console.log('Switching to low performance mode');
+      }
+    }
 
     const uniforms = {
       u_time: time * 0.001,
@@ -101,6 +145,7 @@ const render = (time) => {
     twgl.drawBufferInfo(gl, bufferInfo);
 
     isRendering = true;
+    lastFrameTime = time;
     requestAnimationFrame(render);
   } catch (error) {
     console.error("Render error:", error);
@@ -158,6 +203,25 @@ function initSmoothScrolling() {
       }
     });
   });
+}
+
+// About content toggle functionality
+function initAboutToggle() {
+  const bioContent = document.getElementById('bio-content');
+  const aboutContent = document.getElementById('about-content');
+  
+  // Function to show about content
+  window.showAboutContent = function() {
+    bioContent.classList.remove('active');
+    aboutContent.classList.add('active');
+  };
+  
+  // Function to show bio content
+  window.showBioContent = function() {
+    aboutContent.classList.remove('active');
+    bioContent.classList.add('active');
+  };
+  
 }
 
 // Intersection Observer for scroll animations
@@ -245,23 +309,27 @@ function setupContextLossHandlers() {
 
 // Handle visibility change (tab switching)
 document.addEventListener('visibilitychange', () => {
+  isPageVisible = !document.hidden;
   if (document.hidden) {
-    isRendering = false;
-  } else if (!isRendering) {
-    // Restart rendering when tab becomes visible
-    requestAnimationFrame(render);
+    console.log('Page hidden, pausing shader');
+  } else {
+    console.log('Page visible, resuming shader');
+    if (!isRendering) {
+      requestAnimationFrame(render);
+    }
   }
 });
 
 // Handle page focus/blur
 window.addEventListener('focus', () => {
+  isPageVisible = true;
   if (!isRendering) {
     requestAnimationFrame(render);
   }
 });
 
 window.addEventListener('blur', () => {
-  // Keep rendering but reduce priority
+  isPageVisible = false;
 });
 
 /*================================
@@ -288,6 +356,7 @@ window.addEventListener("DOMContentLoaded", () => {
   
   // Initialize portfolio features
   initSmoothScrolling();
+  initAboutToggle();
   initScrollAnimations();
   initLiquidGlassEffects();
   initParallaxEffect();
