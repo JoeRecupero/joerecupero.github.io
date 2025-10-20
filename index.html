@@ -3,17 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jae's Shader Vault</title>
+  <title>Jae - Portfolio</title>
+  <meta name="description" content="Jae Recupero - Creative Developer & Shader Artist" />
 
   <!-- Link to stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
   <!-- TWGL.js for easy WebGL setup -->
-  <script src="https://twgljs.org/dist/4.x/twgl-full.min.js"></script>
+  <script src="https://twgljs.org/dist/4.x/twgl-full.min.js" onload="console.log('TWGL loaded successfully')" onerror="console.error('Failed to load TWGL library')"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <canvas id="canvas"></canvas>
+  
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <div class="logo">Jae Recupero</div>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Liquid Glass Bio -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="liquid-glass-container">
+        <div class="liquid-glass">
+          <div class="avatar-container">
+            <img src="Pics/avatar2.png" alt="Jae  Recupero" class="avatar" />
+            <div class="avatar-glow"></div>
+          </div>
+          <div class="bio-content">
+            <h1 class="name">Giuseppe Recupero</h1>
+            <h2 class="title">Creative Developer & Shader Artist</h2>
+            <p class="bio-text">
+              I create immersive digital experiences through code, shaders, and interactive art. 
+              Passionate about pushing the boundaries of web technology and visual storytelling.
+            </p>
+            <div class="bio-links">
+              <a href="#projects" class="cta-button">View My Work</a>
+              <a href="#contact" class="cta-button secondary">Get In Touch</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <div class="shader-preview"></div>
+          </div>
+          <div class="project-content">
+            <h3>Shader Vault</h3>
+            <p>Interactive WebGL shader collection showcasing mathematical art and real-time graphics.</p>
+            <div class="project-tech">WebGL • GLSL • JavaScript</div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <div class="shader-preview"></div>
+          </div>
+          <div class="project-content">
+            <h3>Creative Coding</h3>
+            <p>Experimental projects exploring the intersection of art, mathematics, and technology.</p>
+            <div class="project-tech">Processing • p5.js • Creative Coding</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="contact-content">
+        <p>Interested in collaborating or have a project in mind?</p>
+        <div class="contact-links">
+          <a href="mailto:your.email@example.com" class="contact-link">Email</a>
+          <a href="https://github.com/joerecupero" class="contact-link">GitHub</a>
+          <a href="https://linkedin.com/in/yourprofile" class="contact-link">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Vertex Shader -->
   <script id="vertexShader" type="x-shader/x-vertex">#version 300 es
