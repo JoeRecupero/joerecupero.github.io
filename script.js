@@ -378,6 +378,7 @@ window.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
   initLiquidGlassEffects();
   initParallaxEffect();
+  initBackToTopButton();
   
   // Add loading animation
   document.body.style.opacity = '0';
@@ -386,3 +387,48 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.style.opacity = '1';
   }, 100);
 });
+
+/*================================
+|=        Back to Top Button      =
+================================*/
+
+function initBackToTopButton() {
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (!backToTopBtn) return;
+
+  // Show/hide button based on scroll position
+  function toggleBackToTopButton() {
+    const scrollY = window.scrollY;
+    const projectsSection = document.querySelector('.projects-section');
+    
+    if (projectsSection) {
+      const projectsTop = projectsSection.offsetTop;
+      
+      if (scrollY >= projectsTop) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }
+  }
+
+  // Handle button click
+  backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Listen for scroll events with throttling
+  let scrollTimeout;
+  window.addEventListener('scroll', function() {
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = setTimeout(toggleBackToTopButton, 16); // ~60fps
+  });
+  
+  // Initial check with delay to avoid blocking initial render
+  setTimeout(toggleBackToTopButton, 100);
+}
