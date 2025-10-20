@@ -186,45 +186,16 @@ function initScrollAnimations() {
   });
 }
 
-// Liquid glass hover effects
+// Liquid glass hover effects - DISABLED
 function initLiquidGlassEffects() {
-  const liquidGlass = document.querySelector('.liquid-glass');
-  
-  if (liquidGlass) {
-    liquidGlass.addEventListener('mousemove', (e) => {
-      const rect = liquidGlass.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = (y - centerY) / 10;
-      const rotateY = (centerX - x) / 10;
-      
-      liquidGlass.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-    });
-    
-    liquidGlass.addEventListener('mouseleave', () => {
-      liquidGlass.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-    });
-  }
+  // All hover effects removed - card is now static
+  return;
 }
 
-// Parallax effect for hero section
+// Parallax effect for hero section - DISABLED
 function initParallaxEffect() {
-  const hero = document.querySelector('.hero');
-  
-  if (hero) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
-      
-      if (hero) {
-        hero.style.transform = `translateY(${rate}px)`;
-      }
-    });
-  }
+  // Parallax effects removed - hero section is now static
+  return;
 }
 
 /*================================
