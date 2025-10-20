@@ -238,6 +238,7 @@ canvas#canvas {
   right: 0;
   bottom: 0;
   z-index: -1;
+  display: none;
 }
 
 .name {
@@ -809,6 +810,23 @@ canvas#canvas {
     margin: 1rem;
   }
   
+  .bio-content, .about-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bio-content:not(.active), .about-content:not(.active) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    display: none;
+  }
+  
   .name {
     font-size: 2rem;
   }
@@ -824,6 +842,7 @@ canvas#canvas {
   .bio-links {
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
   }
   
   .projects-grid {
@@ -858,6 +877,23 @@ canvas#canvas {
     padding: 1.5rem;
   }
   
+  .bio-content, .about-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bio-content:not(.active), .about-content:not(.active) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    display: none;
+  }
+  
   .avatar {
     width: 120px;
     height: 120px;
@@ -870,6 +906,12 @@ canvas#canvas {
   
   .name {
     font-size: 1.8rem;
+  }
+  
+  .bio-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
   
   .skills-grid {
