@@ -186,10 +186,35 @@ function initScrollAnimations() {
   });
 }
 
-// Liquid glass hover effects - DISABLED
+// Liquid glass hover effects - Subtle Balatro-style
 function initLiquidGlassEffects() {
-  // All hover effects removed - card is now static
-  return;
+  const liquidGlass = document.querySelector('.liquid-glass');
+  
+  // Skip on mobile/touch devices
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+    return;
+  }
+  
+  if (liquidGlass) {
+    liquidGlass.addEventListener('mousemove', (e) => {
+      const rect = liquidGlass.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      // Very subtle rotation based on mouse position
+      const rotateX = (y - centerY) / 30; // Reduced from 10 to 30 for subtlety
+      const rotateY = (centerX - x) / 30; // Reduced from 10 to 30 for subtlety
+      
+      liquidGlass.style.transform = `translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    
+    liquidGlass.addEventListener('mouseleave', () => {
+      liquidGlass.style.transform = 'translateY(0) rotateX(0deg) rotateY(0deg)';
+    });
+  }
 }
 
 // Parallax effect for hero section - DISABLED
